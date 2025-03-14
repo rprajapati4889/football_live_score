@@ -12,18 +12,21 @@ import { toast } from '@/hooks/use-toast';
 const Index = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  // Fetch fixtures for the selected date with fixed error handling
+  // Fetch fixtures for the selected date with improved error handling
   const {
     data: fixturesData,
     isLoading,
     error,
-    refetch
+    refetch,
+    isError
   } = useQuery({
     queryKey: ['fixtures', selectedDate.toISOString().split('T')[0]],
     queryFn: () => getFixturesByDate(selectedDate),
     staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: 2,
     meta: {
       onError: (err: Error) => {
+        console.error('Query error:', err);
         toast({
           title: 'Error',
           description: `Failed to load fixtures: ${err.message}`,
@@ -45,6 +48,9 @@ const Index = () => {
     setSelectedDate(date);
   };
 
+  // Use fallback empty array if no fixture data
+  const fixtures = fixturesData?.data || [];
+
   return (
     <div className="flex h-screen bg-brand-black text-white overflow-hidden">
       <Sidebar />
@@ -59,7 +65,7 @@ const Index = () => {
           />
           
           <FixturesList
-            fixtures={fixturesData?.data || []}
+            fixtures={fixtures}
             isLoading={isLoading}
             error={error as Error}
           />
