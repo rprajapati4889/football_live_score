@@ -1,17 +1,21 @@
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Search, CalendarCheck } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { CalendarCheck } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 
 const Header = () => {
   return (
-    <div className="relative h-40 w-full overflow-hidden rounded-t-lg">
+    <div className="relative w-full rounded-lg overflow-hidden">
+      {/* Main header image */}
       <img 
         src="/lovable-uploads/99437104-c425-4796-9b9d-7aff9eadcbb7.png" 
         alt="Real Madrid players" 
-        className="w-full h-full object-cover"
+        className="w-full h-48 md:h-56 object-cover"
       />
-      <div className="absolute inset-0 bg-black/40 flex items-end p-4">
+      
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/50 flex items-end p-4">
         <div className="flex justify-between items-center w-full">
           <div>
             <span className="flex items-center gap-2 text-white text-sm">

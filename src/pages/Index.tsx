@@ -6,7 +6,9 @@ import Sidebar from '@/components/layout/Sidebar';
 import Header from '@/components/layout/Header';
 import DateSelector from '@/components/fixtures/DateSelector';
 import FixturesList from '@/components/fixtures/FixturesList';
+import FixturesHeader from '@/components/fixtures/FixturesHeader';
 import TrendingNews from '@/components/news/TrendingNews';
+import MobileSidebar from '@/components/layout/MobileSidebar';
 import { toast } from '@/hooks/use-toast';
 
 const Index = () => {
@@ -52,26 +54,51 @@ const Index = () => {
   const fixtures = fixturesData?.data || [];
 
   return (
-    <div className="flex h-screen bg-brand-black text-white overflow-hidden">
-      <Sidebar />
+    <div className="flex min-h-screen bg-brand-black text-white overflow-hidden">
+      {/* Desktop sidebar */}
+      <div className="hidden lg:block">
+        <Sidebar />
+      </div>
       
-      <div className="flex-1 flex overflow-hidden">
-        <main className="flex-1 overflow-y-auto p-6">
-          <Header />
+      {/* Main content */}
+      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+        <main className="flex-1 overflow-y-auto pb-20 lg:pb-0">
+          {/* Mobile header with menu */}
+          <div className="flex items-center gap-2 lg:hidden p-4">
+            <MobileSidebar />
+            <h1 className="text-xl font-bold">
+              <span className="text-white">FOOTBALL</span>
+              <span className="text-brand-yellow">SHURU</span>
+            </h1>
+          </div>
           
-          <DateSelector
-            selectedDate={selectedDate}
-            onDateChange={handleDateChange}
-          />
-          
-          <FixturesList
-            fixtures={fixtures}
-            isLoading={isLoading}
-            error={error as Error}
-          />
+          {/* Main content */}
+          <div className="p-4">
+            <Header />
+            
+            <FixturesHeader />
+            
+            <DateSelector
+              selectedDate={selectedDate}
+              onDateChange={handleDateChange}
+            />
+            
+            <div className="mt-4">
+              <FixturesList
+                fixtures={fixtures}
+                isLoading={isLoading}
+                error={error as Error}
+              />
+            </div>
+          </div>
         </main>
         
-        <aside className="w-[320px] p-6 overflow-y-auto">
+        {/* News sidebar */}
+        <aside className="w-full lg:w-[320px] p-4 bg-brand-dark-gray/50 overflow-y-auto">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">Trending News</h2>
+            <button className="text-brand-yellow">›</button>
+          </div>
           {newsData && <TrendingNews news={newsData} />}
         </aside>
       </div>

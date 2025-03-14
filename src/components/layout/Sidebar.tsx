@@ -1,11 +1,11 @@
 
 import React from 'react';
-import { Search, Home, Users, MapPin, MessageSquare, Bell, Settings, Download, Moon } from 'lucide-react';
+import { Search, Home, Users, MapPin, MessageSquare, Bell, Settings, Download, Moon, Sun } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
 const Sidebar = () => {
   return (
-    <aside className="w-[260px] h-screen bg-brand-dark-gray flex flex-col p-5 text-white">
+    <aside className="w-[260px] h-full bg-brand-dark-gray flex flex-col p-5 text-white overflow-y-auto">
       <div className="mb-6 flex items-center">
         <h1 className="text-xl font-bold">
           <span className="text-white">FOOTBALL</span>
@@ -122,10 +122,11 @@ const Sidebar = () => {
 
         <div className="flex items-center gap-3 mt-4 justify-between">
           <div className="flex items-center gap-3 px-3 py-2">
-            <Moon size={20} className="text-gray-400" />
+            <Sun size={20} className="text-gray-400" />
             <span className="text-gray-400">Light</span>
           </div>
           <div className="flex items-center gap-3 px-3 py-2">
+            <Moon size={20} />
             <span className="text-white font-medium">Dark</span>
           </div>
         </div>
