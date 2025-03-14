@@ -7,11 +7,11 @@ const Header = () => {
   return (
     <div className="relative h-40 w-full overflow-hidden rounded-t-lg">
       <img 
-        src="/lovable-uploads/cb6b0329-ad7c-4a17-923c-e0efa7112e01.png" 
-        alt="Football header" 
+        src="/lovable-uploads/99437104-c425-4796-9b9d-7aff9eadcbb7.png" 
+        alt="Real Madrid players" 
         className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-black/30 flex items-end p-4">
+      <div className="absolute inset-0 bg-black/40 flex items-end p-4">
         <div className="flex justify-between items-center w-full">
           <div>
             <span className="flex items-center gap-2 text-white text-sm">
