@@ -1,14 +1,11 @@
-
 import { format } from 'date-fns';
 import { FixtureResponse } from '@/types/fixtureTypes';
 
 const API_URL = 'https://api.sportmonks.com/v3/football';
 const FIXTURES_ENDPOINT = '/fixtures';
 
-// This would normally be stored securely in environment variables
-// For this demo, we're adding it directly in the code
-// In a real project, you would use process.env.SPORTSMONK_API_KEY
-const API_KEY = 'YOUR_SPORTSMONK_API_KEY';
+// Updated with the provided API key
+const API_KEY = 'VofvtMUPatdjTrcl3obJ0QQXiIaRkicRx3kYsnnOFWcKxKJS2CuydHBZMY3H';
 
 export async function getFixturesByDate(date: Date): Promise<FixtureResponse> {
   const formattedDate = format(date, 'yyyy-MM-dd');

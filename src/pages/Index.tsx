@@ -12,7 +12,7 @@ import { toast } from '@/hooks/use-toast';
 const Index = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  // Fetch fixtures for the selected date
+  // Fetch fixtures for the selected date with fixed error handling
   const {
     data: fixturesData,
     isLoading,
@@ -22,12 +22,14 @@ const Index = () => {
     queryKey: ['fixtures', selectedDate.toISOString().split('T')[0]],
     queryFn: () => getFixturesByDate(selectedDate),
     staleTime: 5 * 60 * 1000, // 5 minutes
-    onError: (err: Error) => {
-      toast({
-        title: 'Error',
-        description: `Failed to load fixtures: ${err.message}`,
-        variant: 'destructive',
-      });
+    meta: {
+      onError: (err: Error) => {
+        toast({
+          title: 'Error',
+          description: `Failed to load fixtures: ${err.message}`,
+          variant: 'destructive',
+        });
+      }
     }
   });
 
