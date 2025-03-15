@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { FixtureResponse } from '@/types/fixtureTypes';
 
 const API_URL = 'https://api.sportmonks.com/v3/football';
-const FIXTURES_ENDPOINT = '/fixtures';
+const FIXTURES_ENDPOINT = '/fixtures/date';
 
 // API key from the user input
 const API_KEY = 'VofvtMUPatdjTrcl3obJ0QQXiIaRkicRx3kYsnnOFWcKxKJS2CuydHBZMY3H';
@@ -12,9 +12,9 @@ export async function getFixturesByDate(date: Date): Promise<FixtureResponse> {
   try {
     const formattedDate = format(date, 'yyyy-MM-dd');
     
-    const url = new URL(`${API_URL}${FIXTURES_ENDPOINT}`);
+    // Updated URL to use the correct endpoint pattern
+    const url = new URL(`${API_URL}${FIXTURES_ENDPOINT}/${formattedDate}`);
     url.searchParams.append('api_token', API_KEY);
-    url.searchParams.append('filters', `date:${formattedDate}`);
     url.searchParams.append('include', 'league,localTeam,visitorTeam,stage,round');
     
     console.log('Fetching fixtures from:', url.toString());
