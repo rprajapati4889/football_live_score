@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getFixturesByDate, getTrendingNews } from '@/services/sportsMonkApi';
@@ -26,15 +25,13 @@ const Index = () => {
     queryFn: () => getFixturesByDate(selectedDate),
     staleTime: 5 * 60 * 1000, // 5 minutes
     retry: 2,
-    meta: {
-      onError: (err: Error) => {
-        console.error('Query error:', err);
-        toast({
-          title: 'Error',
-          description: `Failed to load fixtures: ${err.message}`,
-          variant: 'destructive',
-        });
-      }
+    onError: (err: Error) => {
+      console.error('Query error:', err);
+      toast({
+        title: 'Error',
+        description: `Failed to load fixtures: ${err.message}`,
+        variant: 'destructive',
+      });
     }
   });
 
@@ -50,7 +47,7 @@ const Index = () => {
     setSelectedDate(date);
   };
 
-  // Use fallback empty array if no fixture data
+  // Use empty array if no fixture data
   const fixtures = fixturesData?.data || [];
 
   return (

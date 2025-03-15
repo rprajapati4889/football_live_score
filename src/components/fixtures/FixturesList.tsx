@@ -5,24 +5,46 @@ import { Fixture } from '@/types/fixtureTypes';
 import { Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { ReloadIcon } from '@radix-ui/react-icons';
 
 interface FixturesListProps {
   fixtures: Fixture[];
   isLoading: boolean;
   error: Error | null;
+  onRetry?: () => void;
 }
 
-const FixturesList: React.FC<FixturesListProps> = ({ fixtures, isLoading, error }) => {
+const FixturesList: React.FC<FixturesListProps> = ({ fixtures, isLoading, error, onRetry }) => {
   if (isLoading) {
-    return <div className="text-center p-8">Loading fixtures...</div>;
+    return (
+      <div className="text-center p-8">
+        <ReloadIcon className="animate-spin h-8 w-8 mx-auto mb-4" />
+        <p>Loading fixtures...</p>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="text-center p-8 text-red-500">Error loading fixtures: {error.message}</div>;
+    return (
+      <div className="text-center p-8">
+        <div className="text-red-500 mb-4">Error loading fixtures: {error.message}</div>
+        {onRetry && (
+          <Button onClick={onRetry} variant="outline">
+            Try Again
+          </Button>
+        )}
+      </div>
+    );
   }
 
   if (!fixtures || fixtures.length === 0) {
-    return <div className="text-center p-8">No fixtures found for this date.</div>;
+    return (
+      <div className="text-center p-8 bg-brand-dark-gray rounded-md">
+        <p className="mb-4">No fixtures found for this date.</p>
+        <p className="text-sm text-gray-400">Try selecting a different date.</p>
+      </div>
+    );
   }
 
   // Group fixtures by league
