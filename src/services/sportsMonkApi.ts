@@ -1,8 +1,10 @@
+
 import { format } from 'date-fns';
 import { FixtureResponse } from '@/types/fixtureTypes';
 
 const API_URL = 'https://api.sportmonks.com/v3/football';
 const FIXTURES_ENDPOINT = '/fixtures/date';
+const CORS_PROXY = 'https://corsproxy.io/?';
 
 // API key from the user input
 const API_KEY = 'VofvtMUPatdjTrcl3obJ0QQXiIaRkicRx3kYsnnOFWcKxKJS2CuydHBZMY3H';
@@ -11,13 +13,18 @@ export async function getFixturesByDate(date: Date): Promise<FixtureResponse> {
   const formattedDate = format(date, 'yyyy-MM-dd');
   
   // Updated URL to use the correct endpoint pattern
-  const url = new URL(`${API_URL}${FIXTURES_ENDPOINT}/${formattedDate}`);
-  url.searchParams.append('api_token', API_KEY);
-  url.searchParams.append('include', 'league,localTeam,visitorTeam,stage,round');
+  const apiUrl = `${API_URL}${FIXTURES_ENDPOINT}/${formattedDate}`;
+  const url = new URL(CORS_PROXY + encodeURIComponent(apiUrl));
   
-  console.log('Fetching fixtures from:', url.toString());
+  // Add query parameters to the URL
+  const params = new URLSearchParams();
+  params.append('api_token', API_KEY);
+  params.append('include', 'league,localTeam,visitorTeam,stage,round');
   
-  const response = await fetch(url.toString(), {
+  const fullUrl = `${url.toString()}&${params.toString()}`;
+  console.log('Fetching fixtures from:', fullUrl);
+  
+  const response = await fetch(fullUrl, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
