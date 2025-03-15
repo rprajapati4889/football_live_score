@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getFixturesByDate, getTrendingNews } from '@/services/sportsMonkApi';
@@ -25,6 +26,17 @@ const Index = () => {
     queryFn: () => getFixturesByDate(selectedDate),
     staleTime: 5 * 60 * 1000, // 5 minutes
     retry: 2,
+    meta: {
+      errorHandler: (err: Error) => {
+        console.error('Query error:', err);
+        toast({
+          title: 'Error',
+          description: `Failed to load fixtures: ${err.message}`,
+          variant: 'destructive',
+        });
+      }
+    },
+    // React Query v5+ uses onSettled, onSuccess, or onError callbacks
     onError: (err: Error) => {
       console.error('Query error:', err);
       toast({
