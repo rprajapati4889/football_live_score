@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import { FixtureResponse } from '@/types/fixtureTypes';
+import axios from 'axios';
 
 const API_URL = 'https://api.sportmonks.com/v3/football';
 const FIXTURES_ENDPOINT = '/fixtures/date';
@@ -9,30 +10,31 @@ const API_KEY = 'VofvtMUPatdjTrcl3obJ0QQXiIaRkicRx3kYsnnOFWcKxKJS2CuydHBZMY3H';
 
 export async function getFixturesByDate(date: Date): Promise<FixtureResponse> {
   const formattedDate = format(date, 'yyyy-MM-dd');
-  
-  // Updated URL to use the correct endpoint pattern
-  const url = new URL(`${API_URL}${FIXTURES_ENDPOINT}/${formattedDate}`);
-  url.searchParams.append('api_token', API_KEY);
-  url.searchParams.append('include', 'league,localTeam,visitorTeam,stage,round');
-  
-  console.log('Fetching fixtures from:', url.toString());
-  
-  const response = await fetch(url.toString(), {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-  });
-  
-  if (!response.ok) {
-    console.error('API error:', response.status, response.statusText);
-    throw new Error(`API error: ${response.status} ${response.statusText}`);
+
+  const url = `${API_URL}${FIXTURES_ENDPOINT}/${formattedDate}`;
+
+  try {
+    console.log('Fetching fixtures from:', url);
+
+    const { data } = await axios.get(url, {
+      params: {
+        api_token: API_KEY,
+        // include: 'league,localTeam,visitorTeam,stage,round', // Uncomment if needed
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    });
+
+    console.log('Fixtures data received:', data);
+    return data;
+  } catch (error) {
+    console.error('API error:', error);
+    // throw new Error(`API error: ${error}`);
   }
+
   
-  const data = await response.json();
-  console.log('Fixtures data received:', data);
-  return data;
 }
 
 // Mock function for trending news (since it's not part of the API)
