@@ -35,15 +35,6 @@ const Index = () => {
           variant: 'destructive',
         });
       }
-    },
-    // React Query v5+ uses onSettled, onSuccess, or onError callbacks
-    onError: (err: Error) => {
-      console.error('Query error:', err);
-      toast({
-        title: 'Error',
-        description: `Failed to load fixtures: ${err.message}`,
-        variant: 'destructive',
-      });
     }
   });
 
@@ -97,6 +88,7 @@ const Index = () => {
                 fixtures={fixtures}
                 isLoading={isLoading}
                 error={error as Error}
+                onRetry={refetch}
               />
             </div>
           </div>
