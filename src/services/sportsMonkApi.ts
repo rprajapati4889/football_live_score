@@ -1,9 +1,11 @@
+
 import { format } from 'date-fns';
 import { FixtureResponse } from '@/types/fixtureTypes';
 import axios from 'axios';
 
 const API_URL = 'https://api.sportmonks.com/v3/football';
 const FIXTURES_ENDPOINT = '/fixtures/date';
+const CORS_PROXY = 'https://corsproxy.io/?';
 
 // API key from the user input
 const API_KEY = 'VofvtMUPatdjTrcl3obJ0QQXiIaRkicRx3kYsnnOFWcKxKJS2CuydHBZMY3H';
