@@ -96,7 +96,6 @@ const Index = () => {
         
         {/* News sidebar */}
         <aside className="w-full lg:w-[320px] p-4 bg-brand-dark-gray/50 overflow-y-auto">
-
           {newsData && <TrendingNews news={newsData} />}
         </aside>
       </div>
