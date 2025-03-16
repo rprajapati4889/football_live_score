@@ -2,6 +2,7 @@
 import React from 'react';
 import { Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const FixturesHeader = () => {
   return (
@@ -23,9 +24,17 @@ const FixturesHeader = () => {
       </div>
       
       <div className="flex items-center">
-        <select className="bg-transparent text-white border-none text-sm cursor-pointer outline-none">
-          <option value="all">All Matches</option>
-        </select>
+      <Select defaultValue="all">
+          <SelectTrigger className="w-40 bg-[#2D2D2D] border-none text-white">
+            <SelectValue placeholder="All Matches" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Matches</SelectItem>
+            <SelectItem value="live">Live Matches</SelectItem>
+            <SelectItem value="upcoming">Upcoming</SelectItem>
+            <SelectItem value="finished">Finished</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );

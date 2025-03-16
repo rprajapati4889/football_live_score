@@ -1,24 +1,23 @@
-
 import React from 'react';
-import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import Sidebar from './Sidebar';
 
 const MobileSidebar = () => {
   return (
     <div className="lg:hidden">
-      <Drawer>
-        <DrawerTrigger asChild>
+      <Sheet>
+        <SheetTrigger asChild>
           <button className="text-white p-2">
-            <Menu size={24} />
+            <Menu size={20} />
           </button>
-        </DrawerTrigger>
-        <DrawerContent className="h-[90vh] bg-brand-dark-gray">
+        </SheetTrigger>
+        <SheetContent side="left" className="h-full bg-brand-dark-gray">
           <div className="h-full overflow-auto">
             <Sidebar />
           </div>
-        </DrawerContent>
-      </Drawer>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 };

@@ -9,35 +9,10 @@ const Header = () => {
     <div className="relative w-full rounded-lg overflow-hidden">
       {/* Main header image */}
       <img 
-        src="/lovable-uploads/99437104-c425-4796-9b9d-7aff9eadcbb7.png" 
+        src="/uploads/99437104-c425-4796-9b9d-7aff9eadcbb7.png" 
         alt="Real Madrid players" 
-        className="w-full h-48 md:h-56 object-cover"
+        className="w-full h-48 md:h-56 object-fill"
       />
-      
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50 flex items-end p-4">
-        <div className="flex justify-between items-center w-full">
-          <div>
-            <span className="flex items-center gap-2 text-white text-sm">
-              <span className="bg-brand-yellow w-3 h-3 rounded-full"></span>
-              Live
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Select defaultValue="type">
-              <SelectTrigger className="w-40 bg-brand-dark-gray/80 border-none text-white">
-                <SelectValue placeholder="League Calendar" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="type">League Calendar</SelectItem>
-              </SelectContent>
-            </Select>
-            <button className="bg-brand-yellow text-black p-2 rounded-md">
-              <CalendarCheck size={20} />
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
