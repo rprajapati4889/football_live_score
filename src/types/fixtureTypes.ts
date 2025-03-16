@@ -1,4 +1,3 @@
-
 export interface FixtureResponse {
   data: Fixture[];
   meta: Meta;
@@ -15,6 +14,21 @@ export interface Meta {
   };
 }
 
+export interface RawFixture {
+  id: number;
+  league_id: number;
+  name: string;
+  starting_at: string;
+  starting_at_timestamp: number;
+  state_id: number;
+  season_id: number;
+  stage_id: number;
+  round_id: number;
+  group_id: number | null;
+  aggregate_id: number | null;
+  venue_id: number;
+}
+
 export interface Fixture {
   id: number;
   league_id: number;
@@ -24,30 +38,52 @@ export interface Fixture {
   group_id: number | null;
   aggregate_id: number | null;
   venue_id: number;
-  referee_id: number | null;
-  localteam_id: number;
-  visitorteam_id: number;
-  winner_team_id: number | null;
-  weather_report: any;
-  commentaries: boolean;
-  attendance: number | null;
-  pitch: any;
-  details: any;
-  neutral_venue: boolean;
-  winning_odds_calculated: boolean;
   status: string;
   starting_at: string;
-  minute: number;
-  second: number | null;
-  leg: string;
-  is_current: boolean;
-  scores: Scores;
-  time: Time;
-  league: League;
-  stage: Stage;
-  round: Round;
-  localTeam: Team;
-  visitorTeam: Team;
+  scores: {
+    localteam_score: number;
+    visitorteam_score: number;
+    ht_score: string;
+    ft_score: string;
+    et_score: string | null;
+    ps_score: string | null;
+  };
+  time: {
+    status: string;
+    starting_at: {
+      date_time: string;
+      date: string;
+      time: string;
+      timestamp: number;
+      timezone: string;
+    };
+    minute: number;
+    second: number | null;
+    added_time: number | null;
+    extra_minute: number | null;
+    injury_time: number | null;
+  };
+  league: {
+    id: number;
+    name: string;
+    is_cup: boolean;
+    type: string;
+    logo_path: string;
+  };
+  localTeam: {
+    id: number;
+    name: string;
+    short_code: string;
+    logo_path: string;
+    country_id: number;
+  };
+  visitorTeam: {
+    id: number;
+    name: string;
+    short_code: string;
+    logo_path: string;
+    country_id: number;
+  };
 }
 
 export interface Scores {
