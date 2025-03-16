@@ -24,11 +24,11 @@ const FixturesHeader = () => {
       </div>
       
       <div className="flex items-center">
-      <Select defaultValue="all">
-          <SelectTrigger className="w-40 bg-[#2D2D2D] border-none text-white">
+        <Select defaultValue="all">
+          <SelectTrigger className="w-[140px] bg-[#2D2D2D] border-none text-white h-8">
             <SelectValue placeholder="All Matches" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-brand-dark-gray text-white border-gray-700">
             <SelectItem value="all">All Matches</SelectItem>
             <SelectItem value="live">Live Matches</SelectItem>
             <SelectItem value="upcoming">Upcoming</SelectItem>
